@@ -77,4 +77,39 @@ export class BooksService {
     }
     await this.booksSearchService.remove(id);
   }
+
+  ////////////////////////////////////////////////////////////////
+
+  async searchBooksByDescription(data: string) {
+    const results = await this.booksSearchService.matchStandardSearch(data);
+    const ids = results.map((result) => result.id);
+    if (!ids.length) {
+      return [];
+    }
+    return this.booksRepository.find({
+      where: { id: In(ids) },
+    });
+  }
+
+  async searchBooksByGenre(data: string) {
+    const results = await this.booksSearchService.matchEnglishSearch(data);
+    const ids = results.map((result) => result.id);
+    if (!ids.length) {
+      return [];
+    }
+    return this.booksRepository.find({
+      where: { id: In(ids) },
+    });
+  }
+
+  async searchBooksByAnnotation(data: string) {
+    const results = await this.booksSearchService.matchCustomSearch(data);
+    const ids = results.map((result) => result.id);
+    if (!ids.length) {
+      return [];
+    }
+    return this.booksRepository.find({
+      where: { id: In(ids) },
+    });
+  }
 }

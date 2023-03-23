@@ -58,4 +58,30 @@ export class BooksController {
   remove(@Param('id') id: string) {
     return this.booksService.remove(+id);
   }
+
+  ////////////////////////////////
+
+  @Get('description')
+  async getBooksDescription(@Query('search') search: string) {
+    if (search) {
+      return this.booksService.searchBooksByDescription(search);
+    }
+    return this.booksService.getAllBooks();
+  }
+
+  @Get('genre')
+  async getBooksGenre(@Query('search') search: string) {
+    if (search) {
+      return this.booksService.searchBooksByGenre(search);
+    }
+    return this.booksService.getAllBooks();
+  }
+
+  @Get('annotation')
+  async getBooksAnnotation(@Query('search') search: string) {
+    if (search) {
+      return this.booksService.searchBooksByAnnotation(search);
+    }
+    return this.booksService.getAllBooks();
+  }
 }

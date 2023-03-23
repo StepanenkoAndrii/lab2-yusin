@@ -16,4 +16,13 @@ export class Book {
 
   @Column()
   author: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  genre: string;
+
+  @Column()
+  annotation: string;
 }

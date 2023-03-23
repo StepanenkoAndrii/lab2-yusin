@@ -4,6 +4,9 @@ export interface BookSearchBody {
   price: number;
   releaseDate: string;
   author: string;
+  description: string;
+  genre: string;
+  annotation: string;
 }
 
 export interface BookSearchResult {

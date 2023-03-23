@@ -101,4 +101,51 @@ export default class BooksSearchService {
     const hits = result.hits.hits;
     return hits.map((item) => item._source);
   }
+
+  ////////////////////////////////////////////////////////////////
+
+  async matchStandardSearch(description: string) {
+    const result = await this.elasticsearchService.search<BookSearchBody>({
+      index: this.index,
+      body: {
+        query: {
+          match: {
+            description,
+          },
+        },
+      },
+    });
+    const hits = result.hits.hits;
+    return hits.map((item) => item._source);
+  }
+
+  async matchEnglishSearch(genre: string) {
+    const result = await this.elasticsearchService.search<BookSearchBody>({
+      index: this.index,
+      body: {
+        query: {
+          match: {
+            genre,
+          },
+        },
+      },
+    });
+    const hits = result.hits.hits;
+    return hits.map((item) => item._source);
+  }
+
+  async matchCustomSearch(annotation: string) {
+    const result = await this.elasticsearchService.search<BookSearchBody>({
+      index: this.index,
+      body: {
+        query: {
+          match: {
+            annotation,
+          },
+        },
+      },
+    });
+    const hits = result.hits.hits;
+    return hits.map((item) => item._source);
+  }
 }
